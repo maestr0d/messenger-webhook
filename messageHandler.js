@@ -1,4 +1,5 @@
 const EventEmitter = require('events');
+const request = require('request');
 
 class messageHandler extends EventEmitter {
 //class messageHandler {
