@@ -67,5 +67,6 @@ class messageHandler {
   }
   emitMessage(data){ this.emit('msg', data); }
 }
-messageHandler.prototype.__proto__ = events.EventEmitter.prototype;
+//messageHandler.prototype.__proto__ = events.EventEmitter.prototype;
+messageHandler.prototype = new EventEmitter();
 module.exports = messageHandler;
