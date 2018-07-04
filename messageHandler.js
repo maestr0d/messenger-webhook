@@ -6,7 +6,6 @@ class messageHandler extends EventEmitter {
     super();
     this.app = app;
     this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
-    this.pullHook();
     //EventEmitter.call(this);
   }
 

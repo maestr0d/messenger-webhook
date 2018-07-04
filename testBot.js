@@ -26,3 +26,4 @@ handler.on('message', function(data) {
 app.listen(8085, () => console.log('webhook is listening'));
 
 handler.castHook(config.VERIFY_TOKEN);
+handler.pullHook();
