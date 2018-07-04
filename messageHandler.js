@@ -1,6 +1,6 @@
-var events = require('events');
+const EventEmitter = require('events');
 
-class messageHandler {
+class messageHandler extends EventEmitter {
   constructor(app, PAGE_ACCESS_TOKEN) {
     this.app = app;
     this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
@@ -68,5 +68,5 @@ class messageHandler {
   emitMessage(data){ this.emit('msg', data); }
 }
 //messageHandler.prototype.__proto__ = events.EventEmitter.prototype;
-messageHandler.prototype = new events.EventEmitter();
+//messageHandler.prototype = new events.EventEmitter();
 module.exports = messageHandler;
