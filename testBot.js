@@ -10,6 +10,7 @@ const messageHandler = require('./messageHandler.js');
 const handler = new messageHandler(app, config.PAGE_ACCESS_TOKEN);
 
 handler.on('message', function(data) {
+    console.log("received message");
     let response;
     let randomNumber = Math.floor((Math.random() * 10000) + 1);
 
