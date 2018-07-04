@@ -24,7 +24,7 @@ handler.on('message', function(data) {
 });
 
 handler.on('postback', function(data) {
-    console.log(sender, postback);
+    console.log(data.sender, data.postback);
 });
 
 app.listen(8085, () => console.log('webhook is listening'));
