@@ -6,6 +6,7 @@ class messageHandler extends EventEmitter {
     super();
     this.app = app;
     this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
+    this.pullHook();
     //EventEmitter.call(this);
   }
 
@@ -45,7 +46,7 @@ class messageHandler extends EventEmitter {
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
               console.log('WEBHOOK_VERIFIED');
               res.status(200).send(challenge);
-              pullHook();
+              this.pullHook();
           } 
           else res.sendStatus(403);
       }    
