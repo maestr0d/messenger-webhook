@@ -4,7 +4,7 @@ class messageHandler extends EventEmitter {
   constructor(app, PAGE_ACCESS_TOKEN) {
     messageHandler.app = app;
     messageHandler.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
-    events.EventEmitter.call(messageHandler);
+    EventEmitter.call(messageHandler);
   }
 
   pullHook(){
