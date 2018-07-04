@@ -45,6 +45,7 @@ class messageHandler extends EventEmitter {
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
               console.log('WEBHOOK_VERIFIED');
               res.status(200).send(challenge);
+              pullHook();
           } 
           else res.sendStatus(403);
       }    
