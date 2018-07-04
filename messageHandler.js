@@ -2,13 +2,13 @@ const EventEmitter = require('events');
 
 class messageHandler extends EventEmitter {
   constructor(app, PAGE_ACCESS_TOKEN) {
-    this.app = app;
-    this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
-    events.EventEmitter.call(this);
+    messageHandler.app = app;
+    messageHandler.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
+    events.EventEmitter.call(messageHandler);
   }
 
   pullHook(){
-      this.app.post('/webhook', (req, res) => {
+      messageHandler.app.post('/webhook', (req, res) => {
       let body = req.body;
       if (body.object === 'page') {
           body.entry.forEach((entry) => {
@@ -20,7 +20,7 @@ class messageHandler extends EventEmitter {
 
               if (webhook_event.message) {
                 //emit message event
-                this.emitMessage({
+                messageHandler.emitMessage({
                   sender: sender_psid, 
                   message : webhook_event.message
                 });
@@ -35,7 +35,7 @@ class messageHandler extends EventEmitter {
     });
   }
   castHook(VERIFY_TOKEN){
-    this.app.get('/webhook', (req, res) => {
+    messageHandler.app.get('/webhook', (req, res) => {
       let mode = req.query['hub.mode'];
       let token = req.query['hub.verify_token'];
       let challenge = req.query['hub.challenge'];
@@ -57,7 +57,7 @@ class messageHandler extends EventEmitter {
     }
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": this.PAGE_ACCESS_TOKEN },
+        "qs": { "access_token": messageHandler.PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
@@ -65,7 +65,7 @@ class messageHandler extends EventEmitter {
         else console.error("unable to send message:" + err);
     });
   }
-  emitMessage(data){ this.emit('msg', data); }
+  emitMessage(data){ messageHandler.emit('msg', data); }
 }
 //messageHandler.prototype.__proto__ = events.EventEmitter.prototype;
 //messageHandler.prototype = new events.EventEmitter();
