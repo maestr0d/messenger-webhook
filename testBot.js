@@ -6,7 +6,7 @@ const app = express().use(bodyParser.json());
 
 const config = require("./config.json");
 
-const messageHandler = require('./messageHandler.js');
+const config = require('./messageHandler.js');
 const handler = new messageHandler(app, config.PAGE_ACCESS_TOKEN);
 
 messageHandler.on('message', function(data) {
