@@ -30,7 +30,11 @@ class messageHandler extends EventEmitter {
             }
             this.emit('message', data);
           } else if (webhook_event.postback) {
-             handlePostback(sender_psid, webhook_event.postback);
+            var data = {
+              sender: sender_psid, 
+              postback : webhook_event.postback
+            }
+            this.emit('postback', data);
           }
         });
       res.status(200).send('EVENT_RECEIVED');

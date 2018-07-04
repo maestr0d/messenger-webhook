@@ -23,6 +23,10 @@ handler.on('message', function(data) {
     handler.send(data.sender, response);
 });
 
+handler.on('postback', function(data) {
+    console.log(sender, postback);
+});
+
 app.listen(8085, () => console.log('webhook is listening'));
 
 handler.pullHook();
