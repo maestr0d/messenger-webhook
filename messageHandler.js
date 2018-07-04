@@ -1,15 +1,15 @@
 const EventEmitter = require('events');
 
-class messageHandler extends EventEmitter {
+//class messageHandler extends EventEmitter {
+class messageHandler {
   constructor(app, PAGE_ACCESS_TOKEN) {
-    messageHandler.app = app;
-    messageHandler.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
-    super();
-    //super.call(messageHandler);
+    this.app = app;
+    this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
+    EventEmitter.call(this);
   }
 
   pullHook(){
-      messageHandler.app.post('/webhook', (req, res) => {
+      this.app.post('/webhook', (req, res) => {
       let body = req.body;
       if (body.object === 'page') {
           body.entry.forEach((entry) => {
@@ -21,7 +21,7 @@ class messageHandler extends EventEmitter {
 
               if (webhook_event.message) {
                 //emit message event
-                messageHandler.emitMessage({
+                this.emitMessage({
                   sender: sender_psid, 
                   message : webhook_event.message
                 });
@@ -36,7 +36,7 @@ class messageHandler extends EventEmitter {
     });
   }
   castHook(VERIFY_TOKEN){
-    messageHandler.app.get('/webhook', (req, res) => {
+    this.app.get('/webhook', (req, res) => {
       let mode = req.query['hub.mode'];
       let token = req.query['hub.verify_token'];
       let challenge = req.query['hub.challenge'];
@@ -58,7 +58,7 @@ class messageHandler extends EventEmitter {
     }
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": messageHandler.PAGE_ACCESS_TOKEN },
+        "qs": { "access_token": this.PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
@@ -66,7 +66,7 @@ class messageHandler extends EventEmitter {
         else console.error("unable to send message:" + err);
     });
   }
-  emitMessage(data){ messageHandler.emit('msg', data); }
+  emitMessage(data){ this.emit('msg', data); }
 }
 //messageHandler.prototype.__proto__ = events.EventEmitter.prototype;
 //messageHandler.prototype = new events.EventEmitter();
