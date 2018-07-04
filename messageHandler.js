@@ -3,9 +3,9 @@ const EventEmitter = require('events');
 class messageHandler extends EventEmitter {
 //class messageHandler {
   constructor(app, PAGE_ACCESS_TOKEN) {
+    super();
     this.app = app;
     this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
-    super();
     //EventEmitter.call(this);
   }
 
