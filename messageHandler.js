@@ -1,11 +1,12 @@
 const EventEmitter = require('events');
 
-//class messageHandler extends EventEmitter {
-class messageHandler {
+class messageHandler extends EventEmitter {
+//class messageHandler {
   constructor(app, PAGE_ACCESS_TOKEN) {
     this.app = app;
     this.PAGE_ACCESS_TOKEN = PAGE_ACCESS_TOKEN;
-    EventEmitter.call(this);
+    super();
+    //EventEmitter.call(this);
   }
 
   pullHook(){
